@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:;">
+    <title>Shopping Cart</title>
+    <link rel="icon" href="images/icon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <!-- nav start -->
+    <nav class="navbar">
+
+        <a href="index.html" class="logo">
+            <img src="images/icon1-removebg-preview.png" alt="Bean Boutique Logo">
+        </a>
+
+        <div class="nav-menu">
+            <a href="index.html">Home</a>
+            <a href="coffeeselection.html">Coffee Selection</a>
+            <a href="brewing.html">Brewing Equipment</a>
+
+            <!-- Dropdown -->
+            <div class="dropdown">
+                <a href="eventwork.html">Events & Workshops</a>
+
+            </div>
+
+            <a href="offer.html">Special Offers & Subscriptions</a>
+
+            <div class="dropdown">
+                <a href="blog.html">Blog </a>
+
+            </div>
+
+            <a href="story.html">Our Story</a>
+            <a href="cart.html" class="active">Shopping Cart</a>
+
+        </div>
+
+        <div class="menu-toggle">☰</div>
+
+    </nav>
+    <!-- nav end -->
+
+    <section class="cart-container">
+
+        <div class="cart-grid">
+
+            <!-- LEFT CART TABLE -->
+
+            <div class="cart-table">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="cartItems"></tbody>
+
+                </table>
+
+
+                <div class="coupon-section">
+
+                    <input type="text" id="couponCode" placeholder="Coupon code">
+
+                    <button id="applyCoupon">Apply coupon</button>
+
+                    <button onclick="updateCart()">Update cart</button>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT TOTAL PANEL -->
+
+            <div class="cart-totals">
+
+                <h2>Cart totals</h2>
+
+                <div class="totals-box">
+
+                    <p>
+                        Subtotal
+                        <span id="subtotal">$0</span>
+                    </p>
+
+                    <div class="shipping">
+
+                        <label>
+                            <input type="radio" name="ship" value="5" checked>
+                            Flat rate: $5
+                        </label>
+
+                        <label>
+                            <input type="radio" name="ship" value="0">
+                            In-Store Pickup
+                        </label>
+
+                    </div>
+
+                    <p class="total">
+                        Total
+                        <span id="grandTotal">$0</span>
+                    </p>
+
+                </div>
+
+                <button class="checkout-btn" onclick="checkout()">
+                    Proceed to checkout →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <div id="successPopup" class="popup">
+
+        <div class="popup-box">
+
+            <h3>Order Successful ☕</h3>
+
+            <button onclick="closePopup()">OK</button>
+
+        </div>
+
+    </div>
+
+
+
+
+
+    <!-- footer section start -->
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <!-- Column 1 -->
+            <div class="footer-col">
+                <h3 class="footer-logo">Bean Boutique</h3>
+                <p>
+                    Crafting premium coffee experiences with passion and sustainability.
+                </p>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="coffeeselection.html">Coffee Selection</a>
+                <a href="brewing.html">Brewing Equipment</a>
+                <a href="eventwork.html">Events & Workshops</a>
+                <a href="offer.html">Special Offers</a>
+                <a href="story.html">Our Story</a>
+                <a href="blog.html">Blog</a>
+            </div>
+
+            <!-- Column 3 -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p>📍 129,MyaYadanar Street,Yangon</p>
+                <p>📞 +95 9 123 456 789</p>
+                <p>✉ soeyadanar20033110@beanboutique.com</p>
+            </div>
+
+            <!-- Column 4 -->
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://www.youtube.com/" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://www.tiktok.com/en/" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="https://github.com/yadanar-kim/yadanar-kim.github.io" target="_blank"><i
+                            class="fa-brands fa-github"></i></a>
+                </div>
+
+                <h4>Newsletter</h4>
+                <p>Subscribe to get special offers & updates.</p>
+
+                <!-- <div class="newsletter-box">
+    <input type="email" placeholder="Your Email">
+    <button>Subscribe</button>
+  </div> -->
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 Bean Boutique. All Rights Reserved.
+        </div>
+
+    </footer>
+    <!-- footer section end -->
+    <script>
+        // ===== SIMPLE CART FIX =====
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Get cart from localStorage
+            function getCart() {
+                try {
+                    return JSON.parse(localStorage.getItem('coffeeCart')) || [];
+                } catch (e) {
+                    return [];
+                }
+            }
+
+            // Save cart to localStorage
+            function saveCart(cart) {
+                try {
+                    localStorage.setItem('coffeeCart', JSON.stringify(cart));
+                } catch (e) { }
+            }
+
+            // Format price
+            function formatPrice(price) {
+                return '$' + parseFloat(price).toFixed(2);
+            }
+
+            // Calculate subtotal
+            function calculateSubtotal(cart) {
+                return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            }
+
+            // Update cart count
+            function updateCartCount() {
+                const cart = getCart();
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+                const cartLink = document.querySelector('a[href="cart.html"]');
+                if (cartLink) {
+                    const existingSpan = cartLink.querySelector('.cart-count');
+                    if (existingSpan) existingSpan.remove();
+
+                    if (totalItems > 0) {
+                        const countSpan = document.createElement('span');
+                        countSpan.className = 'cart-count';
+                        countSpan.style.cssText = 'background:#A47551; color:white; border-radius:50%; padding:2px 6px; font-size:12px; margin-left:5px; display:inline-block;';
+                        countSpan.textContent = totalItems;
+                        cartLink.appendChild(countSpan);
+                    }
+                }
+            }
+
+            // Update totals
+            function updateTotals() {
+                const cart = getCart();
+                const subtotal = calculateSubtotal(cart);
+
+                const shippingRadio = document.querySelector('input[name="ship"]:checked');
+                const shipping = shippingRadio ? parseFloat(shippingRadio.value) : 5;
+
+                const subtotalSpan = document.getElementById('subtotal');
+                const grandTotalSpan = document.getElementById('grandTotal');
+
+                if (subtotalSpan) subtotalSpan.textContent = formatPrice(subtotal);
+                if (grandTotalSpan) grandTotalSpan.textContent = formatPrice(subtotal + shipping);
+            }
+
+            // Display cart
+            function displayCart() {
+                const cart = getCart();
+                const tbody = document.getElementById('cartItems');
+                if (!tbody) return;
+
+                if (cart.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:40px;"><h3>Your cart is empty</h3><p><a href="coffeeselection1.html" style="color:#A47551;">Continue shopping</a></p></td></tr>';
+                    return;
+                }
+
+                let html = '';
+                cart.forEach((item, index) => {
+                    html += `
+            <tr>
+                <td>
+                    <div class="product">
+                        <img src="${item.image || 'images/placeholder.jpg'}" alt="${item.name}" style="width:60px; height:60px; object-fit:cover; border-radius:8px;">
+                        <div>
+                            <h4 style="margin:0;">${item.name}</h4>
+                            <button class="remove-btn" data-index="${index}" style="color:#ff4444; background:none; border:none; cursor:pointer; font-size:12px;">Remove</button>
+                        </div>
+                    </div>
+                </td>
+                <td>${formatPrice(item.price)}</td>
+                <td>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <button class="qty-btn" data-index="${index}" data-action="decrease" style="width:30px; height:30px; border:1px solid #ddd; background:white; cursor:pointer;">-</button>
+                        <span style="min-width:30px; text-align:center;">${item.quantity}</span>
+                        <button class="qty-btn" data-index="${index}" data-action="increase" style="width:30px; height:30px; border:1px solid #ddd; background:white; cursor:pointer;">+</button>
+                    </div>
+                </td>
+                <td>${formatPrice(item.price * item.quantity)}</td>
+            </tr>
+            `;
+                });
+
+                tbody.innerHTML = html;
+
+                // Add remove button events
+                document.querySelectorAll('.remove-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = this.getAttribute('data-index');
+                        let cart = getCart();
+                        cart.splice(index, 1);
+                        saveCart(cart);
+                        displayCart();
+                        updateTotals();
+                        updateCartCount();
+                        alert('Item removed from cart');
+                    });
+                });
+
+                // Add quantity button events
+                document.querySelectorAll('.qty-btn').forEach(btn => {
+                    btn.addEventListener('click', function () {
+                        const index = this.getAttribute('data-index');
+                        const action = this.getAttribute('data-action');
+                        let cart = getCart();
+
+                        if (action === 'increase') {
+                            cart[index].quantity++;
+                        } else if (action === 'decrease') {
+                            cart[index].quantity--;
+                            if (cart[index].quantity <= 0) {
+                                cart.splice(index, 1);
+                                alert('Item removed from cart');
+                            }
+                        }
+
+                        saveCart(cart);
+                        displayCart();
+                        updateTotals();
+                        updateCartCount();
+                    });
+                });
+            }
+
+            // Apply coupon
+            document.getElementById('applyCoupon')?.addEventListener('click', function () {
+                const code = document.getElementById('couponCode')?.value;
+                if (code === 'COFFEE10') {
+                    alert('Coupon applied: 10% off! (Demo only)');
+                } else {
+                    alert('Invalid coupon code');
+                }
+            });
+
+            // Update cart button
+            window.updateCart = function () {
+                displayCart();
+                updateTotals();
+            };
+
+            // Checkout
+            window.checkout = function () {
+                if (getCart().length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                document.getElementById('successPopup').style.display = 'flex';
+                localStorage.removeItem('coffeeCart');
+                displayCart();
+                updateTotals();
+                updateCartCount();
+            };
+
+            // Close popup
+            window.closePopup = function () {
+                document.getElementById('successPopup').style.display = 'none';
+            };
+
+            // Initialize
+            displayCart();
+            updateTotals();
+            updateCartCount();
+
+            // Shipping radio change
+            document.querySelectorAll('input[name="ship"]').forEach(radio => {
+                radio.addEventListener('change', updateTotals);
+            });
+        });
+    </script>
+</body>
+
+</html>

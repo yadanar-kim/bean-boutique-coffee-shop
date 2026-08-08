@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event and Workshop</title>
+    <link rel="icon" href="images/icon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+      <!-- nav start -->
+   <nav class="navbar">
+
+ <a href="index.html" class="logo">
+    <img src="images/icon1-removebg-preview.png" alt="Bean Boutique Logo">
+  </a>
+
+  <div class="nav-menu">
+    <a href="index.html">Home</a>
+    <a href="coffeeselection.html">Coffee Selection</a>
+    <a href="brewing.html">Brewing Equipment</a>
+
+    <!-- Dropdown -->
+   <div class="dropdown">
+  <a href="eventwork.html" class="active">Events & Workshops</a>
+  
+</div>
+
+    <a href="offer.html">Special Offers & Subscriptions</a>
+
+    <div class="dropdown">
+      <a href="blog.html">Blog </a>
+     
+    </div>
+
+    <a href="story.html">Our Story</a>
+    <a href="cart.html">Shopping Cart</a>
+
+  </div>
+
+  <div class="menu-toggle">☰</div>
+
+</nav>
+     <!-- nav end -->
+
+     <!-- event list start -->
+
+     <section class="events-hero">
+  <h1>Events & Workshops</h1>
+  <p>Discover upcoming coffee experiences.</p>
+</section>
+
+
+      <!-- event list end -->
+
+      <!-- event detail list -->
+       <section id="latte-art" class="event-detail">
+  <div class="detail-text">
+    <h2>Latte Art Workshop</h2>
+    <p>
+      This workshop covers milk steaming techniques, pouring control,
+      and creative latte art patterns.
+    </p>
+
+    <h3>What You'll Learn:</h3>
+    <ul>
+      <li>Milk frothing techniques</li>
+      <li>Heart & Rosetta design</li>
+      <li>Latte art basics</li>
+    </ul>
+  </div>
+
+  <div class="detail-image">
+    <img src="images/brewingmasterclas.jpg" alt="masterclass">
+  </div>
+</section>
+       <!-- event detail list end -->
+
+       <!-- calender section -->
+        <section class="event-schedule">
+  <h2>Upcoming Event & Workshop</h2>
+
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Event</th>
+      <th>Time</th>
+      <th>Location</th>
+    </tr>
+    <tr>
+      <td>July 25</td>
+      <td>Latte Art Workshop</td>
+      <td>2:00 PM</td>
+      <td>Main Café</td>
+    </tr>
+    <tr>
+      <td>August 10</td>
+      <td>Coffee Tasting</td>
+      <td>5:00 PM</td>
+      <td>Downtown Branch</td>
+    </tr>
+  </table>
+</section>
+
+<section class="event-list">
+
+  <div class="event-card">
+    <h3>Latte Art Workshop</h3>
+    <p>Learn beautiful latte art techniques.</p>
+    <button class="register-btn" data-event="Latte Art Workshop">Register</button>
+  </div>
+
+  <div class="event-card">
+    <h3>Coffee Tasting</h3>
+    <p>Explore single-origin coffee flavors.</p>
+    <button class="register-btn" data-event="Coffee Tasting">Register</button>
+  </div>
+
+</section>
+        <!-- calender section end -->
+
+        <!-- past event section -->
+         <section class="past-events">
+  <h2>Past Events</h2>
+
+  <div class="past-grid">
+    <div>
+      <h3>Barista Basics 2025</h3>
+      <p>Successfully trained 50+ coffee enthusiasts.</p>
+    </div>
+
+    <div>
+      <h3>Community Brew Day</h3>
+      <p>Interactive coffee sharing session.</p>
+    </div>
+  </div>
+</section>
+         <!-- past event section end -->
+
+         <!-- register modal form -->
+          <div class="register-modal" id="registerModal">
+  <div class="modal-content">
+    <span class="event-close-btn">&times;</span>
+    <h3 id="eventTitle">Event</h3>
+
+    <form id="registerForm">
+      <input type="text" placeholder="Your First Name" required>
+      <input type="text" placeholder="Your last Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <button type="submit">Submit</button>
+    </form>
+
+    <p class="success-msg" style="display:none;">
+      Registration Successful!
+    </p>
+  </div>
+</div>
+          <!-- register modal form end -->
+
+           <!-- footer section start -->
+     <footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- Column 1 -->
+    <div class="footer-col">
+      <h3 class="footer-logo">Bean Boutique</h3>
+      <p>
+        Crafting premium coffee experiences with passion and sustainability.
+      </p>
+    </div>
+
+    <!-- Column 2 -->
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="coffeeselection.html">Coffee Selection</a>
+      <a href="brewing.html">Brewing Equipment</a>
+      <a href="#">Events & Workshops</a>
+      <a href="#">Special Offers</a>
+      <a href="">Our Story</a>
+      <a href="">Blog</a>
+    </div>
+
+    <!-- Column 3 -->
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <p>📍 129,MyaYadanar Street,Yangon</p>
+      <p>📞 +95 9 123 456 789</p>
+      <p>✉  soeyadanar20033110@beanboutique.com</p>
+    </div>
+
+    <!-- Column 4 -->
+    <div class="footer-col">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="https://www.youtube.com/"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.tiktok.com/en/"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="https://github.com/yadanar-kim/yadanar-kim.github.io"><i class="fa-brands fa-github"></i></a>
+      </div>
+
+       <h4>Newsletter</h4>
+  <p>Subscribe to get special offers & updates.</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 Bean Boutique. All Rights Reserved.
+  </div>
+
+</footer>
+     <!-- footer section end -->
+
+      <script src="javascript.js"></script>
+
+</body>
+</html>
